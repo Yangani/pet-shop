@@ -56,7 +56,14 @@ ext/                           - Small extensions to the JavaScript language. Ge
 └── globals.js
 ```
 
-To get started, run `node server/index.js`
+To get started, run the following commands:
+
+```bash
+$ npm install
+$ node server/index.js
+```
+
+Then visit [localhost:4000](http://localhost:4000).
 
 # Assignment
 
@@ -66,7 +73,11 @@ WARNING: Always look at the **status code**, especially if you are getting a bla
 
 The starting code provides a basic Mithril app with a single request to this API, and showing the result on the page. Don't forget to `npm install` !
 
-Before you start, poke around the API using Postman. DO NOT SKIP THIS STEP! To use an API token, you will need to include it in the `POST` parameters; the correct key is `apiToken` (don't forget to set your `Content-Type`!)
+### Postman
+
+Before you start, poke around the API using Postman. DO NOT SKIP THIS STEP!
+
+Some endpoints require an API token. You can generate one by signing in. To use it, you will need to include it in the `POST` parameters; the correct key is `apiToken` (don't forget to set your `Content-Type`!)
 
 ## Basic requirements:
 
