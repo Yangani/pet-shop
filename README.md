@@ -113,7 +113,7 @@ For the basic requirements, you will only be working with pet shop `id=1`:
 
 ### Routing
 
-When you reach the Extra Credit, getting started with `m.route` is easy. In your `index.html`, you will replace the `m.mount()` call with a `m.route()` call instead. For each route, you just need to provide a component (an object w/ controller + view).
+When you reach the Extra Credit, getting started with `m.route` is easy. In your `main.js`, you will replace the `m.mount()` call with a `m.route()` call instead. For each route, you just need to provide a component (an object w/ controller + view).
 
 Here is an example:
 
