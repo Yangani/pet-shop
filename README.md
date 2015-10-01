@@ -51,8 +51,7 @@ The `client` folder holds most of the application code, and includes the followi
 ```
 client/
 ├── components
-│   ├── PetShopWindow.js       - The JavaScript code for this component
-│   └── PetShopWindow.scss     - The SCSS code for this specific component
+│   └── PetShopWindow.js       - The JavaScript code for this component
 │
 ├── models
 │   │
@@ -60,6 +59,10 @@ client/
 │
 ├── public
 │   └── index.html             - main html file
+│
+├── styles
+│   │── AuthPanel.scss         - Styles for the AuthPanel component (hint-hint)
+│   └── PetShopWindow.scss     - Styles for the PetShopWindow component
 │
 │── main.js                    - Where all the JavaScript starts
 └── main.scss                  - Where all the Sass starts

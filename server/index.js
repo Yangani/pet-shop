@@ -8,19 +8,9 @@ var shared = ['mithril']
 app.get('/scripts/vendor-bundle.js', browserify(shared))
 app.get('/scripts/app-bundle.js', browserify('./client/main.js', { external: shared }))
 
-// Sass
-var sass = require('node-sass')
-app.get('/styles/*', function(req, res) {
-  var filePath = req.params[0]
-  sass.render({
-    file: Path.join(Path.join(__dirname, '../client'), filePath.replace(/\.css$/, '.scss') )
-  }, function(err, result) {
-    if (err) throw err;
-
-    res.set('Content-Type', 'text/css')
-    res.send(result.css)
-  })
-})
+// Serve sass file
+var sass = require('node-sass-endpoint')
+app.get('/styles/main.css', sass.serve('./client/main.scss'))
 
 // Non-js static files
 app.use(express.static('client/public'))
