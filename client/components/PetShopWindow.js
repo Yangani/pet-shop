@@ -6,12 +6,14 @@ var PetShopWindow = module.exports = {}
 
 PetShopWindow.controller = function () {
   var ctrl = this
-  ctrl.shop = m.prop(null)
-  Shop.fetch().then(ctrl.shop)
+  ctrl.shop = null
+  Shop.fetch().then(function(shopData) {
+    ctrl.shop = shopData
+  })
 }
 
 PetShopWindow.view = function (ctrl) {
   return m('.pet-shop', [
-    m('h1', "Welcome to " + ctrl.shop().name)
+    m('h1', "Welcome to " + ctrl.shop.name)
   ])
 }
