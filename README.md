@@ -2,6 +2,21 @@
 
 In this assignment, you'll be using [Mithril.js](http://mithril.js.org) to implement a pet show browser.
 
+## Learning Takeaways
+
+In the sprint and its accompanying lectures, you will learn the following:
+
+### Major Topics:
+
+- The Virtual DOM and You
+- Separation of concerns with MVC
+- What view-state is, and how it differs from model data
+
+### Minor topics:
+
+- [JavaScript Promises](http://www.html5rocks.com/en/tutorials/es6/promises/)
+- [Browserify](http://browserify.org/)
+
 ## Prerequisites
 
 * Read this post on [what is a Virtual DOM?](http://jbi.sh/what-is-virtual-dom/)
