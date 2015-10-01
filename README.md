@@ -79,7 +79,7 @@ To get started, run the following commands:
 
 ```bash
 $ npm install
-$ node server/index.js
+$ npm start
 ```
 
 Then visit [localhost:4000](http://localhost:4000).
