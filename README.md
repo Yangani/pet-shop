@@ -71,7 +71,8 @@ ext/                           - Small extensions to the JavaScript language. Ge
 │                                with these so you can add them to your toolbelt!
 │── arrays.js
 │── functions.js
-└── globals.js
+│── globals.js
+└── objects.js
 ```
 
 To get started, run the following commands:
