@@ -1,8 +1,8 @@
 // Require language extensions BEFORE anything else
-require('../ext')
-var m = require('mithril')
+require('../ext');
+var m = require('mithril');
 
 
-var PetShopWindow = require('./components/PetShopWindow')
+var PetShopWindow = require('./components/PetShopWindow');
 
-m.mount(document.getElementById('app'), PetShopWindow)
+m.mount(document.getElementById('app'), PetShopWindow);

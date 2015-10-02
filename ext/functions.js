@@ -7,12 +7,12 @@
 //   add5(7) //=> 11
 //
 Function.prototype.papp = function () {
-  var slice = Array.prototype.slice
-  var fn = this
-  var args = slice.call(arguments)
+  var slice = Array.prototype.slice;
+  var fn = this;
+  var args = slice.call(arguments);
   return function () {
-    return fn.apply(this, args.concat(slice.call(arguments)))
-  }
+    return fn.apply(this, args.concat(slice.call(arguments)));
+  };
 }
 
 // Find more function functions at:

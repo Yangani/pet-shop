@@ -1,8 +1,8 @@
-var m = require('mithril')
+var m = require('mithril');
 
 
-var Shop = module.exports = {}
+var Shop = module.exports;
 
 Shop.fetch = function () {
-  return m.request({ method: 'GET', url: 'http://pet-shop.api.mks.io/shops/1' })
+  return m.request({ method: 'GET', url: 'http://pet-shop.api.mks.io/shops/1' });
 }
