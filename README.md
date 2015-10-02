@@ -39,8 +39,7 @@ Mithril views are **reactive**, which means when data changes, the views reflect
 
 ### Learning Resources:
 
-- [Mithril.js: A Tutorial Introduction (Part 1)](http://gilbert.ghost.io/mithril-js-tutorial-1/)
-- [Mithril.js: A Tutorial Introduction (Part 2)](http://gilbert.ghost.io/mithril-js-tutorial-2/)
+- [Mithril.js: A Tutorial Introduction](http://gilbert.ghost.io/mithril-js-tutorial-1/) - don't read part 2 until after you complete the basic requirements
 - [Mithril.js Official Wiki](https://github.com/lhorie/mithril.js/wiki)
 - [Official Docs](http://mithril.js.org/mithril.html) - You should definitely have this open the whole time.
 
