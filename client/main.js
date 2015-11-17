@@ -5,4 +5,6 @@ var m = require('mithril');
 
 var PetShopWindow = require('./components/PetShopWindow');
 
-m.mount(document.getElementById('app'), PetShopWindow);
+m.route(document.getElementById('app'), '/', {
+  '/': PetShopWindow
+});
