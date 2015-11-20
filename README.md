@@ -93,7 +93,13 @@ The starting code provides a basic Mithril app with a single request to this API
 
 ### Postman
 
-Before you start, poke around the API using Postman. DO NOT SKIP THIS STEP!
+Before you start, poke around the API using Postman. **DO NOT SKIP THIS STEP!** Specifically, make sure you figure out how to:
+
+- Get the data for a pet shop
+- Get the data for a pet shop's pets
+- Sign up for an account
+- Sign into an account
+- "Like" a pet
 
 Some endpoints require an API token. You can generate one by signing in. To use it, you will need to include it in the `POST` parameters; the correct key is `apiToken` (don't forget to set your `Content-Type`!)
 
@@ -131,7 +137,7 @@ For the basic requirements, you will only be working with pet shop `id=1`:
 
 ### Routing
 
-When you reach the Extra Credit, getting started with `m.route` is easy. In your `main.js`, you will replace the `m.mount()` call with a `m.route()` call instead. For each route, you just need to provide a component (an object w/ controller + view).
+When you reach the Extra Credit, getting started with `m.route` is easy. In your `main.js`, you only need to add a route to the `m.route()` call. The route key is the url, while the value is a component (an object w/ controller + view).
 
 Here is an example:
 
