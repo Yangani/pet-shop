@@ -10,6 +10,9 @@ PetShopWindow.controller = function() {
   ctrl.apiToken = null;
   ctrl.petId = null;
   ctrl.signedIn = false;
+  ctrl.petName = "Create a pet name";
+  ctrl.petURL = "Give me a picture of your pet";
+  ctrl.species = null;
 
   ctrl.shop = null;
   Shop.fetch().then(function(shopData) {
@@ -37,18 +40,28 @@ PetShopWindow.controller = function() {
   ctrl.like = function() {
     Shop.like(ctrl.petId, ctrl.apiToken)
     .then(function(response){
+    })
+  }
+
+  ctrl.addPet = function(){
+    Shop.addPet(ctrl.species, ctrl.petName, ctrl.petURL, ctrl.apiToken)
+    .then(function(response){
       console.log(response);
     })
   }
 
+  setInterval(function(){
+    Shop.fetchPets()
+    .then(function(petsData){
+      ctrl.shopPets = petsData;
+    })
+  }, 5000);
 
 }
 
 
 PetShopWindow.view = function(ctrl) {
 
-  // setTimeout(Shop.fetch
-  //             .then(response){return }, 2000);
 
   return m('fieldset',[
       m('legend', 'User Name:'),
@@ -66,7 +79,28 @@ PetShopWindow.view = function(ctrl) {
       }),
       m('button', { onclick: ctrl.signUp }, "Sign Up"),
       m('button', { onclick: ctrl.signIn }, "Sign In"),
-
+      //ADD A NEW PET
+      m('input[type=text]', {
+        value: ctrl.petName,
+        oninput: function(e) {
+          ctrl.petName = e.currentTarget.value;
+        }
+      }),
+      m('input[type=text]', {
+        value:ctrl.petURL,
+        oninput: function(e) {
+          ctrl.petURL = e.currentTarget.value;
+        }
+      }),
+      m('input[type=text]', {value:"Species: " + ctrl.species}),
+      m('select',{onchange: function(e){
+        ctrl.species = e.currentTarget.value;
+      }}, [
+        m('option', {value: "cat"}, 'cat'),
+        m('option', {value: "dog"}, 'dog')
+        ]),
+      m('button', { onclick: ctrl.addPet, hidden: !ctrl.signedIn }, "Add Pet"),
+      //VIEW PETS and LIKE
         m('.pet-shop', [
           m('h1', "Welcome to " + ctrl.shop.name),
           ctrl.shopPets.map(function(pet){
@@ -82,7 +116,7 @@ PetShopWindow.view = function(ctrl) {
                      } ,"Like Me!!!!")
                    ]),
                  m('p', 'picture of me!!!'),
-                 m('img', {src:pet.imageUrl})
+                 m('img', {src:pet.imageUrl, height:'10%', width:'10%'})
               ];
             })
         ])

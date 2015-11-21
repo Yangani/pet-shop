@@ -39,3 +39,17 @@ Shop.like = function(petId, apiToken){
                     }
 })
 }
+
+Shop.addPet = function(species, name, imageUrl, apiToken) {
+  return m.request({method: 'POST',
+                    url: 'http://pet-shop.api.mks.io/shops/1/pets/',
+                    data: {
+                        apiToken: apiToken,
+                        shopId: 1,
+                        species: species,
+                        name: name,
+                        imageUrl: imageUrl
+                    }
+})
+}
+
