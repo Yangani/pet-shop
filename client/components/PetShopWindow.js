@@ -3,6 +3,9 @@ var Shop = require('../models/shop');
 
 var PetShopWindow = module.exports;
 
+var storage = localStorage;
+console.log(storage);
+
 PetShopWindow.controller = function() {
   var ctrl = this;
   ctrl.userName = "Input Username",
@@ -12,7 +15,11 @@ PetShopWindow.controller = function() {
   ctrl.signedIn = false;
   ctrl.petName = "Create a pet name";
   ctrl.petURL = "Give me a picture of your pet";
+   ctrl.speciesForFilter = "Select a Species";
   ctrl.species = null;
+
+  ctrl.sorted = false;
+  ctrl.filtered = false;
 
   ctrl.shop = null;
   Shop.fetch().then(function(shopData) {
@@ -34,6 +41,7 @@ PetShopWindow.controller = function() {
     .then(function(response){
       ctrl.apiToken = response.apiToken;
       ctrl.signedIn = true;
+      storage.setitem('signedIn', true);
     });
   }
 
@@ -50,11 +58,35 @@ PetShopWindow.controller = function() {
     })
   }
 
+  ctrl.sortPets = function(){
+    ctrl.shopPets = ctrl.shopPets.sort(function(a,b){
+      return a.likes.length - b.likes.length;
+    })
+    ctrl.sorted = true;
+    storage.setItem('sorted', true);
+  }
+
+  ctrl.filterSpecies = function(){
+    ctrl.shopPets = ctrl.shopPets.filter(function(pet){
+      if (pet.species === ctrl.speciesForFilter){
+        return true;
+      }
+    })
+    storage.setItem('filtered', true);
+  }
+
   setInterval(function(){
     Shop.fetchPets()
     .then(function(petsData){
       ctrl.shopPets = petsData;
+      if(storage.sorted){
+        ctrl.sortPets();
+      }
+      if(storage.filtered) {
+        ctrl.filterSpecies();
+      }
     })
+
   }, 5000);
 
 }
@@ -63,7 +95,8 @@ PetShopWindow.controller = function() {
 PetShopWindow.view = function(ctrl) {
 
 
-  return m('fieldset',[
+  return m('div', [
+      m('fieldset',[
       m('legend', 'User Name:'),
       m('input[type=text]', {
         value: ctrl.userName,
@@ -78,29 +111,49 @@ PetShopWindow.view = function(ctrl) {
         }
       }),
       m('button', { onclick: ctrl.signUp }, "Sign Up"),
-      m('button', { onclick: ctrl.signIn }, "Sign In"),
-      //ADD A NEW PET
-      m('input[type=text]', {
-        value: ctrl.petName,
-        oninput: function(e) {
-          ctrl.petName = e.currentTarget.value;
-        }
-      }),
-      m('input[type=text]', {
-        value:ctrl.petURL,
-        oninput: function(e) {
-          ctrl.petURL = e.currentTarget.value;
-        }
-      }),
-      m('input[type=text]', {value:"Species: " + ctrl.species}),
-      m('select',{onchange: function(e){
-        ctrl.species = e.currentTarget.value;
-      }}, [
-        m('option', {value: "cat"}, 'cat'),
-        m('option', {value: "dog"}, 'dog')
+      m('button', { onclick: ctrl.signIn }, "Sign In")]),
+//////////////////////////ADD A NEW PET/////////////////////////
+      m('fieldset',[
+        m('legend', 'Adding a Pet'),
+        m('input[type=text]', {
+          value: ctrl.petName,
+          oninput: function(e) {
+            ctrl.petName = e.currentTarget.value;
+          }
+        }),
+        m('input[type=text]', {
+          value:ctrl.petURL,
+          oninput: function(e) {
+            ctrl.petURL = e.currentTarget.value;
+          }
+        }),
+        m('input[type=text]', {value:"Species: " + ctrl.species}),
+        m('select',{onchange: function(e){
+          ctrl.species = e.currentTarget.value;
+        }}, [
+          m('option', {value: "cat"}, 'cat'),
+          m('option', {value: "dog"}, 'dog')
+          ]),
+        m('button', { onclick: ctrl.addPet, hidden: !ctrl.signedIn }, "Add Pet")
+      ]),
+///////////////////////////SORT PETS BY LIKES////////////////////////////////
+      m('fieldset',[
+        m('legend', 'Sort Pets'),
+        m('button', {onclick: ctrl.sortPets}, 'Sort Pets')
         ]),
-      m('button', { onclick: ctrl.addPet, hidden: !ctrl.signedIn }, "Add Pet"),
-      //VIEW PETS and LIKE
+///////////////////////////SORT PETS BY LIKES////////////////////////////////
+      m('fieldset',[
+        m('legend', 'Filter based on Species'),
+        m('input[type=text]', {value:"Species: " + ctrl.speciesForFilter}),
+        m('select',{onchange: function(e){
+          ctrl.speciesForFilter = e.currentTarget.value;
+        }}, [
+          m('option', {value: "cat"}, 'cat'),
+          m('option', {value: "dog"}, 'dog')
+          ]),
+        m('button', { onclick: ctrl.filterSpecies}, "Filter Species")
+      ]),
+//////////////////////////VIEW PETS and LIKE////////////////////////////////
         m('.pet-shop', [
           m('h1', "Welcome to " + ctrl.shop.name),
           ctrl.shopPets.map(function(pet){
@@ -120,7 +173,7 @@ PetShopWindow.view = function(ctrl) {
               ];
             })
         ])
-      ])
+        ])
 }
 
 
