@@ -15,7 +15,7 @@ PetShopWindow.controller = function() {
   ctrl.signedIn = false;
   ctrl.petName = "Create a pet name";
   ctrl.petURL = "Give me a picture of your pet";
-   ctrl.speciesForFilter = "Select a Species";
+  ctrl.speciesForFilter = "Select a Species";
   ctrl.species = null;
 
   ctrl.sorted = false;
@@ -41,7 +41,7 @@ PetShopWindow.controller = function() {
     .then(function(response){
       ctrl.apiToken = response.apiToken;
       ctrl.signedIn = true;
-      storage.setitem('signedIn', true);
+      storage.setItem('signedIn', true);
     });
   }
 
@@ -104,7 +104,7 @@ PetShopWindow.view = function(ctrl) {
           ctrl.userName = e.currentTarget.value;
         }
       }),
-      m('input[type=text]', {
+      m('input[type=Password]', {
         value:ctrl.userPassword,
         oninput: function(e) {
           ctrl.userPassword = e.currentTarget.value;
@@ -158,6 +158,7 @@ PetShopWindow.view = function(ctrl) {
           m('h1', "Welcome to " + ctrl.shop.name),
           ctrl.shopPets.map(function(pet){
             return [
+                  m('.pet', [
                  m('p', 'Name: ' + pet.name),
                  m('p', 'Species: ' + pet.species),
                  m('div', [
@@ -169,7 +170,8 @@ PetShopWindow.view = function(ctrl) {
                      } ,"Like Me!!!!")
                    ]),
                  m('p', 'picture of me!!!'),
-                 m('img', {src:pet.imageUrl, height:'10%', width:'10%'})
+                 m('img', {src:pet.imageUrl, height:'100%', width:'100%'})
+                 ])
               ];
             })
         ])
